@@ -12,9 +12,12 @@
     <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<!--Custom styles-->
-	<link rel="stylesheet" type="text/css" href="{% static 'mystyle.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/mystyle.css' %}">
 </head>
 <body>
+{% if error %}
+	<h1> Error : {{ error }} </h1>
+{% endif %}
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -27,20 +30,20 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form action="login/validate/" method="POST">
+				<form action="/login/validate/" method="POST">
 					{% csrf_token %}
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username" name="user_name">
+						<input type="text" class="form-control" placeholder="username" name="username">
 
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password" name="passwd">
+						<input type="password" class="form-control" placeholder="password" name="password">
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
