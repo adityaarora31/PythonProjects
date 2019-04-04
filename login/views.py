@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import FormView
 from .forms import UserRegisterForm, LoginForm
@@ -15,13 +15,19 @@ class NewUser(FormView):
     form_class = UserRegisterForm
     template_name = 'register.html'
 
-    def post(self, request, *args, **kwargs):
-        forms = UserRegisterForm(request.POST)
-        if forms.is_valid():
-            forms.save()
-            return HttpResponse(request, 'login.html')
-        else:
-            return HttpResponse(request, 'register.html')
+    # def post(self, request, *args, **kwargs):
+    #     forms = UserRegisterForm(request.POST)
+    #     if forms.is_valid():
+    #         forms.save()
+    #     else:
+    #         return HttpResponse(request, 'register.html')
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse('login.html')
+
+    def form_invalid(self, form):
+        return HttpResponse('register.html')
 
 
 class UserLogin(FormView):
@@ -37,6 +43,10 @@ class UserLogin(FormView):
             self.request.session['present_user'] = username
             self.request.session['login_switch'] = True
             self.request.session['is_seller'] = RegisterUser.objects.get(username=username).is_seller
-            return HttpResponse(self.request, 'dashboard.html')
+            return redirect('dashboard')
         else:
             return HttpResponse(self.request, 'login.html', {'error': 'Sorry ! Unable to login'})
+
+
+def show(request):
+    return render(request, 'dashboard.html')
