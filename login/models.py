@@ -14,10 +14,10 @@ class RegisterUser(User):
     def __str__(self):
         return self.user_email
 
-
+#
 # class Property(models.Model):
 #     property_title = models.CharField(max_length=20, required=True)
-#     property_address = models.CharField(max_length=20)
+#     property_address = models.CharField(max_length=20, blank=False)
 #     property_city = (
 #         ('Panaji', 'Panaji'),
 #         ('New Delhi', 'New Delhi'),
@@ -30,18 +30,18 @@ class RegisterUser(User):
 #         ('Haryana', 'Haryana'),
 #         ('Punjab', 'Punjab'),
 #     )
-#     property_pin = models.ImageField()
-#     property_price = models.IntegerField()
-#     property_bedroom = models.IntegerField()
-#     property_bathroom = models.IntegerField()
-#     property_sq_feet = models.IntegerField()
-#     property_lot_size = models.IntegerField()
-#     property_garage = models.IntegerField()
+#     property_pin = models.IntegerField(blank=False)
+#     property_price = models.IntegerField(blank=False)
+#     property_bedroom = models.IntegerField(default=1)
+#     property_bathroom = models.IntegerField(default=1)
+#     property_sq_feet = models.IntegerField(blank=False)
+#     property_lot_size = models.IntegerField(blank=False)
+#     property_garage = models.IntegerField(default=0)
 #     property_listing_date = models.DateField(auto_now_add=True)
 #     property_description = models.CharField(max_length=200)
-#     #property_seller_name = models.ForeignKey()
+#     property_seller_name = models.ForeignKey()
 #
 #
 # class PropertyImage(models.Model):
 #     property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-#     property_image = models.ImageField(upload_to='media/images')
+#     property_image = models.ImageField(upload_to='/images')

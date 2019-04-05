@@ -24,10 +24,10 @@ class NewUser(FormView):
 
     def form_valid(self, form):
         form.save()
-        return HttpResponse('login.html')
+        return render(request=self.request, template_name='login.html')
 
     def form_invalid(self, form):
-        return HttpResponse('register.html')
+        return render(request=self.request, template_name='register.html')
 
 
 class UserLogin(FormView):
@@ -43,10 +43,19 @@ class UserLogin(FormView):
             self.request.session['present_user'] = username
             self.request.session['login_switch'] = True
             self.request.session['is_seller'] = RegisterUser.objects.get(username=username).is_seller
-            return redirect('dashboard')
+            first_name = RegisterUser.objects.get(username=username).first_name
+            last_name = RegisterUser.objects.get(username=username).last_name
+            user_email = RegisterUser.objects.get(username=username).user_email
+            user_description = RegisterUser.objects.get(username=username).description
+            is_seller = RegisterUser.objects.get(username=username).is_seller
+            return show_dashboard(request=self.request, username=username, first_name=first_name,
+                                  last_name=last_name, user_email=user_email, user_description=user_description,
+                                  is_seller=is_seller)
         else:
-            return HttpResponse(self.request, 'login.html', {'error': 'Sorry ! Unable to login'})
+            return render(request=self.request, template_name='login.html', context={'error': 'Sorry ! Unable to login !'})
 
 
-def show(request):
-    return render(request, 'dashboard.html')
+def show_dashboard(request, username, first_name, last_name, user_email, user_description, is_seller):
+    return render(request, 'dashboard.html', context={'username': username, 'first_name': first_name,
+                                                      'last_name': last_name, 'user_email': user_email,
+                                                      'user_description': user_description, 'is_seller': is_seller})
