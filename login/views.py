@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import FormView
+from django.views.generic import FormView, UpdateView
 from .forms import UserRegisterForm, LoginForm
 from .models import RegisterUser
 
@@ -27,7 +27,7 @@ class NewUser(FormView):
         return render(request=self.request, template_name='login.html')
 
     def form_invalid(self, form):
-        return render(request=self.request, template_name='register.html')
+        return render(request=self.request, template_name='register.html', context={'form': form.errors})
 
 
 class UserLogin(FormView):
@@ -59,3 +59,9 @@ def show_dashboard(request, username, first_name, last_name, user_email, user_de
     return render(request, 'dashboard.html', context={'username': username, 'first_name': first_name,
                                                       'last_name': last_name, 'user_email': user_email,
                                                       'user_description': user_description, 'is_seller': is_seller})
+
+
+class UpdateDetail(UpdateView):
+    model = RegisterUser
+    fields = ['first_name', 'last_name', 'user_email', 'description']
+    template_name = 'update.html'

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Property</title>
+</head>
+<body>
+{% include 'navbar.html' %}
+
+{% if form.errors %}
+
+{{ form.errors }}
+
+{% endif %}
+
+{% if message %}
+
+{{ message }}
+
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+   {{ form.as_p }}
+    <input type="submit" value="Register Property">
+</form>
+</body>
+</html>

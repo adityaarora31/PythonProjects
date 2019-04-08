@@ -25,6 +25,9 @@
 				</div>
 			</div>
 			<div class="main-login main-center">
+				{% if form.errors %}
+					{{ form.errors }}
+				{% endif %}
 				<form class="form-horizontal" method="post" enctype="multipart/form-data">
 					{% csrf_token %}
 

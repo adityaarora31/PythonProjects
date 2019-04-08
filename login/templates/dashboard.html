@@ -28,6 +28,10 @@
         Email : <i class="icon-envelope"></i> <b> {{ user_email }} </b> <br>
        User Description <i class="icon-comment"></i> {{ user_description }} <br>
       </p>
+        <form method="post" action="/update">
+            {% csrf_token %}
+            <input type="submit" value="Update Details">
+        </form>
     </div>
     </div>
   </div>
