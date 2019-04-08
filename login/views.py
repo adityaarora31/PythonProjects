@@ -1,7 +1,5 @@
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.shortcuts import render
 from django.views.generic import FormView, UpdateView
 from .forms import UserRegisterForm, LoginForm
 from .models import RegisterUser
@@ -14,13 +12,6 @@ def index(request):
 class NewUser(FormView):
     form_class = UserRegisterForm
     template_name = 'register.html'
-
-    # def post(self, request, *args, **kwargs):
-    #     forms = UserRegisterForm(request.POST)
-    #     if forms.is_valid():
-    #         forms.save()
-    #     else:
-    #         return HttpResponse(request, 'register.html')
 
     def form_valid(self, form):
         form.save()
@@ -65,3 +56,4 @@ class UpdateDetail(UpdateView):
     model = RegisterUser
     fields = ['first_name', 'last_name', 'user_email', 'description']
     template_name = 'update.html'
+
