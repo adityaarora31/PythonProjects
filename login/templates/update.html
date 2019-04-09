@@ -5,8 +5,7 @@
     <title>Update</title>
 </head>
 <body>
-{% include 'navbar.html' %}
-<form method="POST">
+<form method="POST" action="/login/dashboard/">
     {% csrf_token %}
     {{ form.as_p }}
     <br>

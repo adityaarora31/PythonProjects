@@ -7,7 +7,6 @@
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <body>
-{% include 'navbar.html' %}
 <div class="container">
   <div class="row">
     <div class="span2">
@@ -28,7 +27,7 @@
         Email : <i class="icon-envelope"></i> <b> {{ user_email }} </b> <br>
        User Description <i class="icon-comment"></i> {{ user_description }} <br>
       </p>
-        <form method="post" action="/update">
+        <form method="post" action="/login/update/{{ user_id }}">
             {% csrf_token %}
             <input type="submit" value="Update Details">
         </form>

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PropertyOperations, UpdateProperty, ViewProperty, ViewSpecificProperty
+from .views import PropertyOperations, UpdateProperty, ViewProperty, ViewSpecificProperty, search_property
 
 urlpatterns = [
     #path('', PropertyOperations.as_view, name='name'),
@@ -7,4 +7,5 @@ urlpatterns = [
     path('update_property/<int:pk>/', UpdateProperty.as_view(), name='update_property'),
     path('view_property/', ViewProperty.as_view(), name='view_property'),
     path('view_property/<int:pk>/', ViewSpecificProperty.as_view(), name='view_specific_property'),
+    path('search/', search_property, name="search"),
 ]

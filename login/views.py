@@ -9,6 +9,10 @@ def index(request):
     return render(request, 'login.html')
 
 
+def homepage(request):
+    return render(request, 'homepage.html')
+
+
 class NewUser(FormView):
     form_class = UserRegisterForm
     template_name = 'register.html'
@@ -39,17 +43,20 @@ class UserLogin(FormView):
             user_email = RegisterUser.objects.get(username=username).user_email
             user_description = RegisterUser.objects.get(username=username).description
             is_seller = RegisterUser.objects.get(username=username).is_seller
+            user_id = RegisterUser.objects.get(username=username).user_id
+
             return show_dashboard(request=self.request, username=username, first_name=first_name,
                                   last_name=last_name, user_email=user_email, user_description=user_description,
-                                  is_seller=is_seller)
+                                  is_seller=is_seller, user_id=user_id)
         else:
             return render(request=self.request, template_name='login.html', context={'error': 'Sorry ! Unable to login !'})
 
 
-def show_dashboard(request, username, first_name, last_name, user_email, user_description, is_seller):
+def show_dashboard(request, username, first_name, last_name, user_email, user_description, is_seller, user_id):
     return render(request, 'dashboard.html', context={'username': username, 'first_name': first_name,
                                                       'last_name': last_name, 'user_email': user_email,
-                                                      'user_description': user_description, 'is_seller': is_seller})
+                                                      'user_description': user_description, 'is_seller': is_seller,
+                                                      'user_id': user_id})
 
 
 class UpdateDetail(UpdateView):

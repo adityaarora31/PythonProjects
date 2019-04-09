@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import FormView, UpdateView, ListView, DetailView
@@ -40,10 +40,22 @@ class UpdateProperty(UpdateView):
 
 class ViewProperty(ListView):
     model = Property
-    paginate_by = 1
-    template_name = 'property_list.html'
+    paginate_by = 2
+    template_name = 'categories.html'
 
 
 class ViewSpecificProperty(DetailView):
     model = Property
     template_name = 'property_detail.html'
+
+
+def search_property(request):
+    if request.method == 'POST':
+        property_to_search = request.POST.get('search')
+        try:
+            status = Property.objects.filter(property_title__contains=property_to_search)
+            if not status:
+                raise Exception
+            return render(request, 'search.html', {'property': status})
+        except Exception:
+            return render(request, 'search.html', {'errors': 'Property Not Found !'})

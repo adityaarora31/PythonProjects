@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    {% load static %}
+    <style>
+        .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+    </style>
+</head>
+<body>
+{% if errors %}
+<img src="{% static 'login/img/404-error.jpg' %}" class="center" >
+<h1 class="center"> {{ errors }} </h1>
+
+{{ err }}
+{% endif %}
+
+{% for info in property %}
+<img src="{{ info.property_image.url }}" width="300px" height="200px" >
+{{ info.property_title }} <br>
+{{ info.property_address }} <br>
+{{ info.property_pin }} <br>
+{{ info.property_state }} <br>
+{% endfor %}
+</body>
+</html>
