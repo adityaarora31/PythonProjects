@@ -5,11 +5,19 @@
     <title>Update</title>
 </head>
 <body>
-<form method="POST" action="/login/dashboard/">
+<div>
+    {% include 'header.html' %}
+</div>
+<br> <br> <br> <br> <br> <br> <br> <br> <br>
+<form method="POST" action="/login/dashboard/" style="background-color:aqua;">
     {% csrf_token %}
     {{ form.as_p }}
     <br>
     <input type="submit" value="Update Details">
 </form>
+<br>
+<footer>
+    {% include 'footer.html' %}
+</footer>
 </body>
 </html>

@@ -5,11 +5,16 @@
     <title>Update Property</title>
 </head>
 <body>
-<form method="post" enctype="multipart/form-data">
+{% include 'header.html' %}
+<br> <br> <br> <br> <br> <br> <br>
+<form method="post" action="/property/view_property/" enctype="multipart/form-data" style="background-color:aqua;">
     {% csrf_token %}
     {{ form.as_p }}
     <br>
     <input type="submit" value="Update">
 </form>
+<footer>
+    {% include 'footer.html' %}
+</footer>
 </body>
 </html>

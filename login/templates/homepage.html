@@ -32,57 +32,9 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	
-	<!-- Header section -->
-	<header class="header-section">
-		<div class="header-top">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 header-top-left">
-						<div class="top-info">
-							<i class="fa fa-phone"></i>
-							(+91) 9999 104 107
-						</div>
-						<div class="top-info">
-							<i class="fa fa-envelope"></i>
-							info@brickybricks.com
-						</div>
-					</div>
-					<div class="col-lg-6 text-lg-right header-top-right">
-
-						<div class="user-panel">
-							<a href="/login/register"><i class="fa fa-user-circle-o"></i> Register</a>
-							<a href="/login/"><i class="fa fa-sign-in"></i> Login</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="site-navbar">
-						<a href="#" class="site-logo"><img src="{% static 'login/img/logo.png' %}" alt="" width="150px" height="70px"></a>
-						<div class="nav-switch">
-							<i class="fa fa-bars"></i>
-						</div>
-						<ul class="main-menu">
-							<li><a href=" ">Home</a></li>
-							<li><a href="/property/view_property/">FEATURED LISTING</a></li>
-							<li><a href="about.html">ABOUT US</a></li>
-							<li><a href="single-list.html">Pages</a></li>
-							<li><a href="blog.html">Blog</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header section end -->
-
-
+{% include 'header.html' %}
 	<!-- Hero section -->
+	{% block hero %}
 	<section class="hero-section set-bg" data-setbg="{% static 'login/img/bg.jpg' %}">
 		<div class="container hero-text text-white">
 			<h2>find your place with our local life style</h2>
@@ -90,20 +42,29 @@
 			<a href="#" class="site-btn">VIEW DETAIL</a>
 		</div>
 	</section>
+	{% endblock %}
 	<!-- Hero section end -->
 
-
+{% block filter %}
 	<!-- Filter form section -->
 	<div class="filter-search">
 		<div class="container">
 			<form class="filter-form" method="POST" action="/property/search/">
 				{% csrf_token %}
 				<input type="text" placeholder="Enter a street name, address number or keyword" name="search">
-				<select>
+				<select name="city">
 					<option value="City">City</option>
+					<option value="Panaji"> Panaji  </option>
+					<option value="New Delhi"> New Delhi  </option>
+					<option value="Gurugram"> Gurugram  </option>
+					<option value="Chandigarh"> Chandigarh  </option>
 				</select>
-				<select>
-					<option value="City">State</option>
+				<select name="state">
+					<option value="State">State</option>
+					<option value="Goa"> Goa  </option>
+					<option value="Delhi"> Delhi  </option>
+					<option value="Haryana"> Haryana  </option>
+					<option value="Punjab"> Punjab  </option>
 				</select>
 				<button class="site-btn fs-submit">SEARCH</button>
 			</form>
@@ -111,8 +72,9 @@
 	</div>
 	<!-- Filter form section end -->
 
+{% endblock %}
 
-
+	{% block property %}
 	<!-- Properties section -->
 	<section class="properties-section spad">
 		<div class="container">
@@ -173,8 +135,9 @@
 		</div>
 	</section>
 	<!-- Properties section end -->
+{% endblock %}
 
-
+	{% block services %}
 	<!-- Services section -->
 	<section class="services-section spad set-bg" data-setbg="img/service-bg.jpg">
 		<div class="container">
@@ -215,8 +178,9 @@
 		</div>
 	</section>
 	<!-- Services section end -->
+{% endblock %}
 
-
+	{% block feature %}
 	<!-- feature section -->
 	<section class="feature-section spad">
 		<div class="container">
@@ -440,8 +404,8 @@
 	</section>
 	<!-- feature section end -->
 
-
-
+{% endblock %}
+{% block featureproperty %}
 	<!-- feature category section -->
 	<section class="feature-category-section spad">
 		<div class="container">
@@ -471,7 +435,9 @@
 	</section>
 	<!-- feature category section end-->
 
+{% endblock %}
 
+	{% block gallery %}
 	<!-- Gallery section -->
 	<section class="gallery-section spad">
 		<div class="container">
@@ -512,7 +478,9 @@
 	<!-- Gallery section end -->
 
 
+{% endblock %}
 
+	{% block review %}
 	<!-- Review section -->
 	<section class="review-section set-bg" data-setbg="img/review-bg.jpg">
 		<div class="container">
@@ -561,7 +529,9 @@
 	</section>
 	<!-- Review section end-->
 
+{% endblock %}
 
+	{% block blog %}
 	<!-- Blog section -->
 	<section class="blog-section spad">
 		<div class="container">
@@ -601,7 +571,8 @@
 		</div>
 	</section>
 	<!-- Blog section end -->
-
+{% endblock %}
+	{% block clients %}
 	<!-- Clients section -->
 	<div class="clients-section">
 		<div class="container">
@@ -626,83 +597,14 @@
 	</div>
 	<!-- Clients section end -->
 
+{% endblock %}
 
 
+	{% block footer %}
 	<!-- Footer section -->
-	<footer class="footer-section set-bg" data-setbg="img/footer-bg.jpg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-6 footer-widget">
-					<img src="img/logo.png" alt="">
-					<p>Lorem ipsum dolo sit azmet, consecter dipise consult  elit. Maecenas mamus antesme non anean a dolor sample tempor nuncest erat.</p>
-					<div class="social">
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-instagram"></i></a>
-						<a href="#"><i class="fa fa-pinterest"></i></a>
-						<a href="#"><i class="fa fa-linkedin"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 footer-widget">
-					<div class="contact-widget">
-						<h5 class="fw-title">CONTACT US</h5>
-						<p><i class="fa fa-map-marker"></i>3711-2880 Nulla St, Mankato, Mississippi </p>
-						<p><i class="fa fa-phone"></i>(+88) 666 121 4321</p>
-						<p><i class="fa fa-envelope"></i>info.leramiz@colorlib.com</p>
-						<p><i class="fa fa-clock-o"></i>Mon - Sat, 08 AM - 06 PM</p>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 footer-widget">
-					<div class="double-menu-widget">
-						<h5 class="fw-title">POPULAR PLACES</h5>
-						<ul>
-							<li><a href="">Florida</a></li>
-							<li><a href="">New York</a></li>
-							<li><a href="">Washington</a></li>
-							<li><a href="">Los Angeles</a></li>
-							<li><a href="">Chicago</a></li>
-						</ul>
-						<ul>
-							<li><a href="">St Louis</a></li>
-							<li><a href="">Jacksonville</a></li>
-							<li><a href="">San Jose</a></li>
-							<li><a href="">San Diego</a></li>
-							<li><a href="">Houston</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6  footer-widget">
-					<div class="newslatter-widget">
-						<h5 class="fw-title">NEWSLETTER</h5>
-						<p>Subscribe your email to get the latest news and new offer also discount</p>
-						<form class="footer-newslatter-form">
-							<input type="text" placeholder="Email address">
-							<button><i class="fa fa-send"></i></button>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="footer-bottom">
-				<div class="footer-nav">
-					<ul>
-						<li><a href="">Home</a></li>
-						<li><a href="">Featured Listing</a></li>
-						<li><a href="">About us</a></li>
-						<li><a href="">Pages</a></li>
-						<li><a href="">Blog</a></li>
-						<li><a href="">Contact</a></li>
-					</ul>
-				</div>
-				<div class="copyright">
-					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-				</div>
-			</div>
-		</div>
-	</footer>
+
 	<!-- Footer section end -->
-                                        
+	{% endblock %}
 	<!--====== Javascripts & Jquery ======-->
 	<script src="{% static 'login/js/jquery-3.2.1.min.js' %}"></script>
 	<script src="{% static 'login/js/bootstrap.min.js' %}"></script>
@@ -710,5 +612,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="{% static 'login/js/masonry.pkgd.min.js' %}"></script>
 	<script src="{% static 'login/js/magnific-popup.min.js' %}"></script>
 	<script src="{% static 'login/js/main.js' %}"></script>
+
 </body>
 </html>

@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    label {
+color: #4286f4;
+font-weight: bold;
+display: block;
+width: 150px;
+float: left;
+}
+</style>
 <body>
-<img src="{{ property.property_image.url }}" height="200px" width="400px" ><br>
-{{ property.property_title }}<br>
-{{ property.property_address }}<br>
-{{ property.property_city }}<br>
-{{ property.property_state }}<br>
-{{ property.property_pin }}<br>
-{{ property.property_price }}<br>
-{{ property.property_bedroom }}<br>
-{{ property.property_bathroom }}<br>
-{{ property.property_sq_feet }}<br>
-{{ property.property_lot_size }}<br>
-{{ property.property_garage }}<br>
-{{ property.property_description }}<br>
+<table>
+
+<tr><td><img src="{{ property.property_image.url }}" height="200px" width="400px" > </td> </tr>
+<tr><td><label> Property Title</label> {{ property.property_title }}</td></tr>
+    <tr><td><label> Property Address</label>{{ property.property_address }}</td></tr>
+<tr><td><label> Property City</label> {{ property.property_city }}</td></tr>
+    <tr><td><label> Property State</label> {{ property.property_state }}</td></tr>
+<tr><td><label> Property Pin</label>{{ property.property_pin }}</td></tr>
+<tr><td><label> Property Price</label>{{ property.property_price }}</td></tr>
+<tr><td><label> Property Bedroom</label>{{ property.property_bedroom }}</td></tr>
+<tr><td><label> Property Bathroom</label>{{ property.property_bathroom }}</td></tr>
+<tr><td><label> Property Sq Feet</label>{{ property.property_sq_feet }}</td></tr>
+<tr><td><label> Property Lot Size</label>{{ property.property_lot_size }}</td></tr>
+<tr><td><label> Property Garage</label>{{ property.property_garage }}</td></tr>
+<tr><td><label> Property Description</label>{{ property.property_description }}</td></tr>
+    </table>
 </body>
 </html>

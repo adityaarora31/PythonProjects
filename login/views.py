@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import FormView, UpdateView
 from .forms import UserRegisterForm, LoginForm
@@ -44,23 +46,26 @@ class UserLogin(FormView):
             user_description = RegisterUser.objects.get(username=username).description
             is_seller = RegisterUser.objects.get(username=username).is_seller
             user_id = RegisterUser.objects.get(username=username).user_id
-
+            logged_in = True
             return show_dashboard(request=self.request, username=username, first_name=first_name,
                                   last_name=last_name, user_email=user_email, user_description=user_description,
-                                  is_seller=is_seller, user_id=user_id)
+                                  is_seller=is_seller, user_id=user_id, logged_in=logged_in)
         else:
             return render(request=self.request, template_name='login.html', context={'error': 'Sorry ! Unable to login !'})
 
 
-def show_dashboard(request, username, first_name, last_name, user_email, user_description, is_seller, user_id):
-    return render(request, 'dashboard.html', context={'username': username, 'first_name': first_name,
-                                                      'last_name': last_name, 'user_email': user_email,
-                                                      'user_description': user_description, 'is_seller': is_seller,
-                                                      'user_id': user_id})
+@login_required
+def show_dashboard(request, username, first_name, last_name, user_email, user_description, is_seller, user_id, logged_in):
+    if request.session['login_switch']:
+        return render(request, 'dashboard.html', context={'username': username, 'first_name': first_name,
+                                                          'last_name': last_name, 'user_email': user_email,
+                                                          'user_description': user_description, 'is_seller': is_seller,
+                                                          'user_id': user_id, 'logged_in': logged_in})
+    else:
+        return render(request, 'login.html')
 
 
-class UpdateDetail(UpdateView):
+class UpdateDetail(LoginRequiredMixin, UpdateView):
     model = RegisterUser
     fields = ['first_name', 'last_name', 'user_email', 'description']
     template_name = 'update.html'
-

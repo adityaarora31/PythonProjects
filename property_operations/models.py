@@ -34,3 +34,9 @@ class Property(models.Model):
     property_image3 = models.ImageField(upload_to='media/property', default="", blank=True)
     property_image4 = models.ImageField(upload_to='media/property', default="", blank=True)
 
+
+class Enquiry(models.Model):
+    enquiry_property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    enquiry_description = models.TextField(max_length=200, blank=False)
+    enquiry_date = models.DateField(auto_now_add=True)
+    enquiry_person_email = models.EmailField(default="")

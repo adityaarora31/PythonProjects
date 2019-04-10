@@ -1,7 +1,4 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from django.views import View
 from django.views.generic import FormView, UpdateView, ListView, DetailView
 from django.contrib.auth.models import User
 from .forms import PropertyForm
@@ -52,10 +49,14 @@ class ViewSpecificProperty(DetailView):
 def search_property(request):
     if request.method == 'POST':
         property_to_search = request.POST.get('search')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
         try:
             status = Property.objects.filter(property_title__contains=property_to_search)
+            status.union(Property.objects.filter(property_city__contains=city))
+            status.union(Property.objects.filter(property_state__contains=state))
             if not status:
                 raise Exception
             return render(request, 'search.html', {'property': status})
-        except Exception:
+        except Property.DoesNotExist:
             return render(request, 'search.html', {'errors': 'Property Not Found !'})

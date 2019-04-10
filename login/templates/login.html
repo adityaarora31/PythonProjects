@@ -15,10 +15,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'login/css/mystyle.css' %}">
 </head>
 <body>
+{% include 'header.html' %}
 
-{% if error %}
-	<h1 style="color: red"> Error : {{ error }} </h1>
-{% endif %}
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -61,12 +59,15 @@
 				<div class="d-flex justify-content-center">
 					<a href="#">Forgot your password?</a>
 				</div>
+				{% if error %}
+	<h1 style="color: red"> Error : {{ error }} </h1>
+{% endif %}
 			</div>
 		</div>
 	</div>
 </div>
-<footer>
-</footer>
+
+{% include 'footer.html' %}
 </body>
 
 </html>

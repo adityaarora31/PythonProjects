@@ -21,3 +21,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput())
 
 
+# class UpdateDetails(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['first_name', 'last_name']

@@ -7,7 +7,13 @@
 <!------ Include the above in your HEAD tag ---------->
 </head>
 <body>
-<div class="container">
+{% include 'header.html' %}
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+    <div class="container">
   <div class="row">
     <div class="span2">
       <img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  alt="" class="img-rounded">
@@ -16,9 +22,9 @@
       <blockquote>
          Username : <p>{{ username }}</p>
       {% if is_seller %}
-        <p> Seller </p>
+        <p> Seller </p> <a href="/property/register_property/" > Register Property </a>
         {% else %}
-        <p> Buyer </p>
+        <p> Buyer </p>  <a href="/property/view_property/"> View Property </a>
       {% endif %}
       </blockquote>
       <p>
@@ -27,12 +33,13 @@
         Email : <i class="icon-envelope"></i> <b> {{ user_email }} </b> <br>
        User Description <i class="icon-comment"></i> {{ user_description }} <br>
       </p>
-        <form method="post" action="/login/update/{{ user_id }}">
+        <form method="post" action="/login/update/{{user_id}}/">
             {% csrf_token %}
             <input type="submit" value="Update Details">
         </form>
     </div>
     </div>
   </div>
+{% include 'footer.html' %}
 </body>
 </html>

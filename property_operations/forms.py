@@ -10,3 +10,10 @@ class PropertyForm(ModelForm):
                   'property_price', 'property_bedroom', 'property_bathroom', 'property_sq_feet', 'property_lot_size',
                   'property_garage', 'property_description', 'property_image', 'property_image2', 'property_image3',
                   'property_image4']
+
+#
+# class EnquiryForm(ModelForm):
+#
+#     class Meta:
+#         model = Enquiry
+#         fields = ['enquiry_description']

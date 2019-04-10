@@ -5,8 +5,8 @@
     <title>Register Property</title>
 </head>
 <body>
-{% include 'navbar.html' %}
-
+{% include 'header.html' %}
+<br> <br> <br> <br> <br> <br> <br>
 {% if form.errors %}
 
 {{ form.errors }}
@@ -18,11 +18,13 @@
 {{ message }}
 
 {% endif %}
-
-<form method="post" enctype="multipart/form-data">
+<form method="post" action="/property/view_property/" enctype="multipart/form-data" style="background-color:aqua;">
     {% csrf_token %}
    {{ form.as_p }}
     <input type="submit" value="Register Property">
 </form>
+<footer>
+    {% include 'footer.html' %}
+</footer>
 </body>
 </html>
