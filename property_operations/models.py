@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from login.models import RegisterUser
 
 
 class Property(models.Model):
@@ -39,4 +40,5 @@ class Enquiry(models.Model):
     enquiry_property = models.ForeignKey(Property, on_delete=models.CASCADE)
     enquiry_description = models.TextField(max_length=200, blank=False)
     enquiry_date = models.DateField(auto_now_add=True)
-    enquiry_person_email = models.EmailField(default="")
+    enquiry_person = models.ForeignKey(RegisterUser, on_delete=models.CASCADE, default='')
+

@@ -30,5 +30,12 @@ float: left;
 <tr><td><label> Property Garage</label>{{ property.property_garage }}</td></tr>
 <tr><td><label> Property Description</label>{{ property.property_description }}</td></tr>
     </table>
+<form method="POST" action="{% url 'make_query' pid=property.id %}">
+    {% csrf_token %}
+        <textarea rows="6" cols="70" placeholder="Write your enquires..." name="Query"> </textarea>
+        <br>
+        <input type="submit" value="Submit">
+</form>
+
 </body>
 </html>

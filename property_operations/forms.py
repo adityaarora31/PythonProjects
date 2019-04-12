@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Property
+from .models import Property, Enquiry
 
 
 class PropertyForm(ModelForm):
@@ -11,9 +11,9 @@ class PropertyForm(ModelForm):
                   'property_garage', 'property_description', 'property_image', 'property_image2', 'property_image3',
                   'property_image4']
 
-#
-# class EnquiryForm(ModelForm):
-#
-#     class Meta:
-#         model = Enquiry
-#         fields = ['enquiry_description']
+
+class EnquiryForm(ModelForm):
+
+    class Meta:
+        model = Enquiry
+        fields = ['enquiry_description']

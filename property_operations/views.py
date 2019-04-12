@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.views.generic import FormView, UpdateView, ListView, DetailView
 from django.contrib.auth.models import User
+import smtplib
+from login.models import RegisterUser
 from .forms import PropertyForm
-from .models import Property
+from .models import Property, Enquiry
+PASSWORD = "@dity@@ror@31"
 
 
 class PropertyOperations(FormView):
@@ -45,6 +49,16 @@ class ViewSpecificProperty(DetailView):
     model = Property
     template_name = 'property_detail.html'
 
+    # def post(self, *args):
+    #     import pdb;pdb.set_trace()
+    #     return
+
+
+# def handle_query(self, request):
+#         query = Enquiry()
+#         current_user = User.objects.get(pk=self.id)
+#         query.mail = current_user.user_email
+
 
 def search_property(request):
     if request.method == 'POST':
@@ -60,3 +74,38 @@ def search_property(request):
             return render(request, 'search.html', {'property': status})
         except Property.DoesNotExist:
             return render(request, 'search.html', {'errors': 'Property Not Found !'})
+
+
+def property_view(request):
+    user = RegisterUser.objects.get(username=request.user)
+    if request.method == 'GET' and user.is_seller:
+        try:
+            property = Property.objects.filter(property_seller_name=request.user)
+            return render(request, 'seller_property.html', {'property': property, 'is_seller': True})
+        except Property.DoesNotExist:
+            return render(request, 'seller_property.html', {'property': "You have not posted any property !",
+                                                            'is_seller': True})
+
+
+def make_query(request, pid):
+    try:
+        enq = Enquiry()
+        enq.enquiry_property = Property.objects.get(id=pid)
+        enq.enquiry_person = RegisterUser.objects.get(username=request.user)
+        enq.enquiry_description = request.POST.get('Query')
+        EMAIL_ADDRESS = "aditya.arora@tothenew.com"
+        property_seller_email = RegisterUser.objects.get(id=pid).user_email
+        import pdb;
+        pdb.set_trace()
+        enq.save()
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo()
+        server.starttls()
+        server.login(EMAIL_ADDRESS, PASSWORD)
+        message = 'Subject: {}\n\n{}'.format(enq.enquiry_property.property_title, enq.enquiry_description)
+        server.sendmail(EMAIL_ADDRESS, property_seller_email, message)
+        server.quit()
+        print("Success: Email sent!")
+    except:
+        return HttpResponse("Email failed to send.")
+    return redirect('/view_property/', id=pid)

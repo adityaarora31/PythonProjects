@@ -23,6 +23,7 @@
          Username : <p>{{ username }}</p>
       {% if is_seller %}
         <p> Seller </p> <a href="/property/register_property/" > Register Property </a>
+          <a href="/property/property_view/"> View Property </a>
         {% else %}
         <p> Buyer </p>  <a href="/property/view_property/"> View Property </a>
       {% endif %}

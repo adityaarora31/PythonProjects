@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'header.html' %}
+<br><br><br> <br><br><br>
+{% if is_seller %}
+{% for info in property %}
+<img src="{{ info.property_image.url }}" height="200px" width="400px" >
+{{ info.property_title }}
+{{ info.property_address }}
+{{ info.property_city }}
+{{ info.property_state }}
+{{ info.property_pin }}
+{{ info.property_price }}
+{{ info.property_bedroom }}
+{{ info.property_bathroom }}
+{{ info.property_sq_feet }}
+{{ info.property_lot_size }}
+{{ info.property_garage }}
+{{ info.property_description }}
+
+<a href="/property/update_property/{{ info.id }}/">Update Property</a>
+{% endfor %}
+{% else %}
+<p>You are not a seller !</p>
+{% endif %}
+{% include 'footer.html' %}
+</body>
+</html>

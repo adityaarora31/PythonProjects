@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PropertyOperations, UpdateProperty, ViewProperty, ViewSpecificProperty, search_property
+from .views import PropertyOperations, UpdateProperty, ViewProperty, ViewSpecificProperty, search_property, property_view, make_query
 
 urlpatterns = [
     #path('', PropertyOperations.as_view, name='name'),
@@ -8,4 +8,6 @@ urlpatterns = [
     path('view_property/', ViewProperty.as_view(), name='view_property'),
     path('view_property/<int:pk>/', ViewSpecificProperty.as_view(), name='view_specific_property'),
     path('search/', search_property, name="search"),
+    path('property_view/', property_view, name="seller_view_property"),
+    path('query/<int:pid>', make_query, name="make_query")
 ]
